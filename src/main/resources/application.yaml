@@ -1,0 +1,74 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v0
+
+spring:
+  profiles:
+    active: oracle
+---
+spring:
+  profiles: db2
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: hw_rpt
+    password: venta
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    hibernate:
+#      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.Oracle10gDialect
+mybatis:
+  type-aliases-package: com.cloudsrcsoft.reportes.repository.mybatis.spec
+  type-handler-package: classpath*:com/cloudsrcsoft/reportes/repository/mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+jwt:
+  header: Authorization
+  secret: tasksSecret
+  expiration: 600000 #minutos
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+
+
+---    
+spring:
+  profiles: oracle
+  datasource:
+    url: jdbc:oracle:thin:@132.148.86.24:1521:xe
+#    username: hw_rpt
+#    password: hwrpt
+#    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: hw_rpt
+    password: hwrpt
+    driver-class-name: oracle.jdbc.OracleDriver
+    tomcat:
+      max-active: 30
+      test-on-borrow: true
+  jpa:
+    hibernate:
+#      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.Oracle10gDialect
+mybatis:
+  type-aliases-package: com.cloudsrcsoft.reportes.repository.mybatis.spec
+  type-handler-package: classpath*:com/cloudsrcsoft/reportes/repository/mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    
+
+
+jwt:
+  header: Authorization
+  secret: SisusCorporation
+  expiration: 300 #600000
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
