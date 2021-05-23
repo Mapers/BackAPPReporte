@@ -12,6 +12,7 @@ import com.cloudsrcsoft.reportes.request.ReporteConsultaFiltroRequest;
 public interface IReporteService {
 	List<Map<String, Object>> getConsultaFiltro(ReporteConsultaFiltroRequest reporte);
 	Integer setGuardarConfiguracionNotificacion(BaseGuardarConfigNotificaciones reporte);
+	Integer setGuardarConfiguracionNotificacion(BaseGuardarConfigNotificaciones reporte, Integer userId);
 	Integer setGuardarTokenUsuario(BaseGuardarTokenRequest reporte);
 	List<Map<String, Object>> getConfiguracionNotificacion(BaseRequest base);
 	Integer setGuardarBitacora(BaseGuardarBitacora base);

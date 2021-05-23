@@ -54,10 +54,9 @@ public class ReporteController {
 	@PostMapping(path = "/configuracion-notificaciones/guardar",produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> setGuardarConfiguracionNotificacion(@RequestBody BaseGuardarConfigNotificaciones reporte){
 
-	
-	
-	   System.out.println(reporteService.setGuardarConfiguracionNotificacion(reporte));
-	        return ResponseEntity.ok(new SingleResponse (true));
+		int response = reporteService.setGuardarConfiguracionNotificacion(reporte);
+		log.info("User notification config response value: {}", response);
+		return ResponseEntity.ok(new SingleResponse (response == 0 ? false : true));
 	}
 	@PostMapping(path = "/configuracion-notificaciones")
 	

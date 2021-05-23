@@ -1,13 +1,15 @@
 package com.cloudsrcsoft.reportes.request;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BaseGuardarConfigNotificaciones {
-	public BaseGuardarConfigNotificaciones(Integer enable, Date date, String type_query,
-			Map<String, Double> type_queries, Date date_end, String type_send, List<String> specialities, Integer id) {
+
+	public BaseGuardarConfigNotificaciones() {}
+
+	public BaseGuardarConfigNotificaciones(Integer enable, LocalDate date, String type_query,
+										   LinkedHashMap<String, Double> type_queries, LocalDate date_end, String type_send, List<String> specialities, Integer id) {
 		super();
 		this.enable = enable;
 		this.date = date;
@@ -21,10 +23,10 @@ public class BaseGuardarConfigNotificaciones {
 
 	
 	private Integer enable;
-	private Date date;
+	private LocalDate date;
 	private String type_query;
-    private Map<String, Double> type_queries;
-    private Date date_end;
+    private LinkedHashMap<String, Double> type_queries;
+    private LocalDate date_end;
     private String type_send;
 	private List<String> specialities;
 	private Integer id;
@@ -34,10 +36,10 @@ public class BaseGuardarConfigNotificaciones {
 	public void setEnable(Integer enable) {
 		this.enable = enable;
 	}
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	public String getType_query() {
@@ -46,16 +48,16 @@ public class BaseGuardarConfigNotificaciones {
 	public void setType_query(String type_query) {
 		this.type_query = type_query;
 	}
-	public Map<String, Double> getType_queries() {
+	public LinkedHashMap<String, Double> getType_queries() {
 		return type_queries;
 	}
-	public void setType_queries(Map<String, Double> type_queries) {
+	public void setType_queries(LinkedHashMap<String, Double> type_queries) {
 		this.type_queries = type_queries;
 	}
-	public Date getDate_end() {
+	public LocalDate getDate_end() {
 		return date_end;
 	}
-	public void setDate_end(Date date_end) {
+	public void setDate_end(LocalDate date_end) {
 		this.date_end = date_end;
 	}
 	public String getType_send() {
