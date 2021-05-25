@@ -1,8 +1,10 @@
 package com.cloudsrcsoft.reportes.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cloudsrcsoft.reportes.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,17 @@ public class ReporteController {
 		log.info("User notification config response value: {}", response);
 		return ResponseEntity.ok(new SingleResponse (response == 0 ? false : true));
 	}
+
+	@PostMapping(path = "/configuracion-notificaciones/eliminar", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> deleteConfiguracionNotificacion(@RequestBody HashMap<String, Integer> data){
+		if (data.isEmpty() || !data.containsKey("id")) {
+			throw new BusinessException("Enter id field");
+		}
+		int response = reporteService.deleteConfiguracionNotificacion(data.get("id"));
+		log.info("User notification config delete: {} row(s)", response);
+		return ResponseEntity.ok(new SingleResponse (true));
+	}
+
 	@PostMapping(path = "/configuracion-notificaciones")
 	
 	public List<Map<String, Object>> getConfiguracionNotificacion(@RequestBody BaseRequest reporte){

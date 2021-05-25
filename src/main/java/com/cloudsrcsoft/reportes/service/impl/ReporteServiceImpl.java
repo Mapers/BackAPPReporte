@@ -91,6 +91,11 @@ public class ReporteServiceImpl implements IReporteService{
 	}
 
 	@Override
+	public Integer deleteConfiguracionNotificacion(Integer id) {
+		return this.userNotificationConfigRepository.deleteUserNotificationConfigById(id.longValue());
+	}
+
+	@Override
 	public List<Map<String, Object>> getConfiguracionNotificacion(BaseRequest reporte) {
 		return reporteCustomRepository.getConfiguracionNotificacion(reporte);
 
