@@ -14,6 +14,9 @@ public class UserNotificationConfigEntity implements Serializable {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "NAME")
+    private String name;
+
     @Column(name = "ENABLED")
     private int enabled;
 
@@ -47,6 +50,14 @@ public class UserNotificationConfigEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getEnabled() {

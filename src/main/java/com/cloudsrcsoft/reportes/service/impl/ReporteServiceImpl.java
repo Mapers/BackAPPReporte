@@ -63,6 +63,7 @@ public class ReporteServiceImpl implements IReporteService{
 		Optional<UserNotificationConfigEntity> optUserConfig;
 		if (reporte.getId() == null) {
 			UserNotificationConfigEntity userConfig = new UserNotificationConfigEntity();
+			userConfig.setName(reporte.getName());
 			userConfig.setEnabled(reporte.getEnable());
 			userConfig.setStartDate(reporte.getDate());
 			userConfig.setEndingDate(reporte.getDate_end());
@@ -75,6 +76,7 @@ public class ReporteServiceImpl implements IReporteService{
 		} else {
 			optUserConfig = this.userNotificationConfigRepository.findById(reporte.getId().longValue())
 					.map(model -> {
+						model.setName(reporte.getName());
 						model.setEnabled(reporte.getEnable());
 						model.setStartDate(reporte.getDate());
 						model.setTypeQuery(reporte.getType_query());
