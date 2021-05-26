@@ -36,4 +36,14 @@ public class PushNotificationRequest {
     public String getToken() {
         return token;
     }
+
+    @Override
+    public String toString() {
+        return "PushNotificationRequest{" +
+                "title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                ", topic='" + topic + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

@@ -126,11 +126,25 @@ public class Tasks {
                         System.out.println(parts[parte].replace(cadena + "=", "").trim());
                         System.out.println(map.get("DATE_CONFIG_END"));
                         if (Double.parseDouble(map2.get(cadena2).toString()) >= Double.parseDouble(parts[parte].replace(cadena + "=", "").trim()) && Double.parseDouble(map.get("ENABLED").toString()) == 1) {
-                            //System.out.println("entro");
-                            //System.out.println(map.get("TOKEN_ID").toString());
-                            //ENVIO DE NOTIFICACION
-                            PushNotificationRequest request = new PushNotificationRequest(fecha.toString(), "Se superó los " + mensaje2 + parts[parte].replace(cadena + "=", "").trim() + mensaje + fecha.toString(), "", map.get("TOKEN_ID").toString());
+                            // ENVIO DE NOTIFICACION
+                            String notificationName = map.containsKey("NAME") ? map.get("NAME").toString() : "Nueva notificación";
+                            Double amount = Double.parseDouble(parts[parte].replace(cadena + "=", "").trim());
+                            String strAmount = "";
+                            switch (cadena) {
+                                case "TOTAL_MOUNT":
+                                    strAmount = String.format("%.2f", amount);
+                                    break;
+                                default:
+                                    int value = amount.intValue();
+                                    strAmount = String.valueOf(value);
+                                    break;
+                            }
+                            String typeDescription = mensaje2 + strAmount + " " + mensaje;
+                            String notificationDate = new SimpleDateFormat("dd/MM/yyyy").format(fecha.getTime());
+                            String notificationMessage = String.format("Se superó los %s - %s", typeDescription, notificationDate);
+                            PushNotificationRequest request = new PushNotificationRequest(notificationName, notificationMessage, "", map.get("TOKEN_ID").toString());
 
+                            log.info("Sending push user notification with data: {}", request);
                             pushNotificationService.sendPushNotificationToToken(request);
 						  /*jdbcTemplate.update("call RPT_GUARDAR_CONFIG_USER(?,?,?,?,?,?,?,?,?,?)",
 								map.get("ID").toString(),
@@ -172,8 +186,10 @@ public class Tasks {
                             }
 
                             LocalDate endingDate = date_config_end != null ? LocalDate.parse(date_config_end, formatter) : null;
+                            String notifName = map.containsKey("NAME") ? map.get("NAME").toString() : "";
 
                             BaseGuardarConfigNotificaciones reporte = new BaseGuardarConfigNotificaciones();
+                            reporte.setName(notifName);
                             reporte.setId(configId);
                             reporte.setEnable(0);
                             reporte.setDate(startDate);
