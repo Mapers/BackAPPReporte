@@ -78,12 +78,12 @@ public class Tasks {
                 String date_config_end;
                 if ((fecha.get(Calendar.MONTH) + 1) == (fechaactual.get(Calendar.MONTH) + 1) &&
                         (fecha.get(Calendar.YEAR)) == (fechaactual.get(Calendar.YEAR))) {
-                    List<String> listStrings2 = new ArrayList<String>();
+                    List<String> listStrings2;
 
                     String especialidades = map.get("SPECIALITIES").toString().replaceAll("[\\[\\](){}]", "").trim();
-                    String str[] = especialidades.split(",");
+                    String[] str = especialidades.split(",");
                     listStrings2 = java.util.Arrays.asList(str);
-                    System.out.println(listStrings2.toString());
+                    System.out.println(listStrings2);
 
                     if (map.get("DATE_CONFIG_END") == null) {
                         date_config_end = null;
@@ -129,19 +129,33 @@ public class Tasks {
                             // ENVIO DE NOTIFICACION
                             String notificationName = map.containsKey("NAME") ? map.get("NAME").toString() : "Nueva notificación";
                             Double amount = Double.parseDouble(parts[parte].replace(cadena + "=", "").trim());
-                            String strAmount = "";
-                            switch (cadena) {
-                                case "TOTAL_MOUNT":
-                                    strAmount = String.format("%.2f", amount);
-                                    break;
-                                default:
-                                    int value = amount.intValue();
-                                    strAmount = String.valueOf(value);
-                                    break;
+                            String strAmount;
+                            if ("TOTAL_MOUNT".equals(cadena)) {
+                                strAmount = String.format("%.2f", amount);
+                            } else {
+                                int value = amount.intValue();
+                                strAmount = String.valueOf(value);
                             }
                             String typeDescription = mensaje2 + strAmount + " " + mensaje;
-                            String notificationDate = new SimpleDateFormat("dd/MM/yyyy").format(fecha.getTime());
-                            String notificationMessage = String.format("Se superó los %s - %s", typeDescription, notificationDate);
+                            String notificationDate = "";
+                            if (map.containsKey("TYPE_SEND")) {
+                                switch (map.get("TYPE_SEND").toString()) {
+                                    case "MONTH":
+                                        String month = new SimpleDateFormat("MMMM", new Locale("es", "ES")).format(fecha.getTime());
+                                        notificationDate = String.format("del mes de %s", StringUtils.capitalize(month));
+                                        break;
+                                    case "RANGE":
+                                        String initDate = map.get("DATE_CONFIG").toString();
+                                        String endDate = map.get("DATE_CONFIG_END").toString();
+                                        notificationDate = String.format("desde %s al %s", initDate, endDate);
+                                        break;
+                                    default:
+                                        String date = new SimpleDateFormat("dd/MM/yyyy").format(fecha.getTime());
+                                        notificationDate = String.format("para el día %s", date);
+                                        break;
+                                }
+                            }
+                            String notificationMessage = String.format("Se superó los %s %s", typeDescription, notificationDate);
                             PushNotificationRequest request = new PushNotificationRequest(notificationName, notificationMessage, "", map.get("TOKEN_ID").toString());
 
                             log.info("Sending push user notification with data: {}", request);
@@ -207,7 +221,6 @@ public class Tasks {
 
                 }
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
