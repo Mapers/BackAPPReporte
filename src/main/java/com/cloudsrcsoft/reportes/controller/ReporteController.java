@@ -34,14 +34,14 @@ public class ReporteController {
 
     @PostMapping(path = "/usuario/token/guardar", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> setGuardarTokenUsuario(@RequestBody BaseGuardarTokenRequest reporte) {
-        log.info("[ReporteController] Start setGuardarTokenUsuario - token: {}", reporte.getNotification_token());
+        log.info("[CONTROLLER][ReporteController] Start setGuardarTokenUsuario - token: {}", reporte.getNotification_token());
         int response = reporteService.setGuardarTokenUsuario(reporte);
         return ResponseEntity.ok(new SingleResponse(response != 0));
     }
 
     @PostMapping(path = "/usuario/token/eliminar", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> deleteTokenUsuario(@RequestBody BaseGuardarTokenRequest reporte) {
-        log.info("[ReporteController] Start deleteTokenUsuario - token: {}", reporte.getNotification_token());
+        log.info("[CONTROLLER][ReporteController] Start deleteTokenUsuario - token: {}", reporte.getNotification_token());
         int response = reporteService.deleteTokenUsuario(reporte);
         log.info("Device token delete: {} row(s)", response);
         return ResponseEntity.ok(new SingleResponse(true));

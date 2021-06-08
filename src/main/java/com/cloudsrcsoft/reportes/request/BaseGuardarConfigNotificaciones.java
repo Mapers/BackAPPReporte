@@ -104,4 +104,19 @@ public class BaseGuardarConfigNotificaciones {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "BaseGuardarConfigNotificaciones{" +
+                "enable=" + enable +
+                ", date=" + date +
+                ", type_query='" + type_query + '\'' +
+                ", type_queries=" + type_queries +
+                ", date_end=" + date_end +
+                ", type_send='" + type_send + '\'' +
+                ", specialities=" + specialities +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

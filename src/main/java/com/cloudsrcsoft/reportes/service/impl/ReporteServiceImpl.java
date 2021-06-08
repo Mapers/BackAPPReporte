@@ -76,6 +76,7 @@ public class ReporteServiceImpl implements IReporteService {
     public Integer setGuardarConfiguracionNotificacion(BaseGuardarConfigNotificaciones reporte, Integer userId) {
         Optional<UserNotificationConfigEntity> optUserConfig;
         if (reporte.getId() == null) {
+            log.info("[SERVICE][SAVE CONFIG] Start setGuardarConfiguracionNotificacion - userId: {}, configuration body: {}", userId, reporte);
             UserNotificationConfigEntity userConfig = new UserNotificationConfigEntity();
             userConfig.setName(reporte.getName());
             userConfig.setEnabled(reporte.getEnable());
@@ -88,6 +89,7 @@ public class ReporteServiceImpl implements IReporteService {
             userConfig.setSpecialities(reporte.getSpecialities().toString());
             optUserConfig = Optional.of(this.userNotificationConfigRepository.save(userConfig));
         } else {
+            log.info("[SERVICE][UPDATE CONFIG] Start setGuardarConfiguracionNotificacion - userId: {}, configuration body: {}", userId, reporte);
             optUserConfig = this.userNotificationConfigRepository.findById(reporte.getId().longValue())
                     .map(model -> {
                         model.setName(reporte.getName());

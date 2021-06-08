@@ -1,6 +1,8 @@
 package com.cloudsrcsoft.reportes.security.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class AuthenticationController {
 
+    private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -41,7 +45,7 @@ public class AuthenticationController {
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
-        System.out.println("Username: " + authenticationRequest.getUsername());
+        log.info("[CONTROLLER][AUTHENTICATION] User authentication: {}", authenticationRequest.getUsername());
 
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(
