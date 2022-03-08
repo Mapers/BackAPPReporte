@@ -1,25 +1,20 @@
 package com.cloudsrcsoft.reportes.service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.cloudsrcsoft.reportes.service.impl.ReportServiceImpl;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-@Service
 
+@Service
 public class FCMInitializer {
-	private static final Logger log = LoggerFactory.getLogger(ReportServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(FCMInitializer.class);
 
 	InputStream serviceAccount = this.getClass().getClassLoader().getResourceAsStream("./appreportehumanidadsur-firebase-adminsdk-ch7rp-ecce79413f.json");
     @PostConstruct

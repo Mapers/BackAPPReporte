@@ -1,6 +1,5 @@
 package com.cloudsrcsoft.reportes.security.controller;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,6 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         log.info("[CONTROLLER][AUTHENTICATION] User authentication: {}", authenticationRequest.getUsername());
-
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

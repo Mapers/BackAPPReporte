@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.cloudsrcsoft.reportes.entity.DeviceTokenEntity;
 import com.cloudsrcsoft.reportes.entity.UserNotificationConfigEntity;
 import com.cloudsrcsoft.reportes.exception.BusinessException;
 import com.cloudsrcsoft.reportes.repository.jpa.DeviceTokenRepository;
@@ -48,10 +47,10 @@ public class ReporteServiceImpl implements IReporteService {
 
     @Override
     public Integer setGuardarTokenUsuario(BaseGuardarTokenRequest reporte) {
-        List<DeviceTokenEntity> deviceTokens = this.deviceTokenRepository.findAllByToken(reporte.getNotification_token());
+        /*List<DeviceTokenEntity> deviceTokens = this.deviceTokenRepository.findAllByToken(reporte.getNotification_token());
         if (!deviceTokens.isEmpty()) {
             return 1;
-        }
+        }*/
         return reporteCustomRepository.setGuardarTokenUsuario(reporte);
     }
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cloudsrcsoft.reportes.exception.BusinessException;
+import com.cloudsrcsoft.reportes.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cloudsrcsoft.reportes.request.BaseGuardarBitacora;
-import com.cloudsrcsoft.reportes.request.BaseGuardarConfigNotificaciones;
-import com.cloudsrcsoft.reportes.request.BaseGuardarTokenRequest;
-import com.cloudsrcsoft.reportes.request.BaseRequest;
-import com.cloudsrcsoft.reportes.request.ReporteConsultaFiltroRequest;
 import com.cloudsrcsoft.reportes.service.iface.IReporteService;
 import com.cloudsrcsoft.reportes.response.SingleResponse;
 
